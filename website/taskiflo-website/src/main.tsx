@@ -44,6 +44,67 @@ const submissionValues = [
   ['Search terms', 'marketing automation, social media, approval workflow, content calendar, AI marketing'],
 ]
 
+const workflowCards = [
+  {
+    title: '1. Onboarding and business analysis',
+    trigger: 'Owner signs up and submits the business website URL.',
+    steps: ['Crawl website', 'Identify products and services', 'Learn brand tone', 'Create workspace memory'],
+    output: 'A dedicated AI context workspace for the business.',
+    mode: 'Setup workflow',
+  },
+  {
+    title: '2. Gmail AI automation',
+    trigger: 'A customer, supplier, or partner email arrives.',
+    steps: ['Classify email', 'Read business context', 'Draft reply', 'Approve or auto-send'],
+    output: 'Context-aware Gmail replies that improve as Taskiflo learns patterns.',
+    mode: 'Approval or automation',
+  },
+  {
+    title: '3. Shopify order management',
+    trigger: 'A customer asks about an order through email, Instagram, or Facebook.',
+    steps: ['Extract order ID', 'Look up Shopify order', 'Fetch tracking', 'Generate accurate reply'],
+    output: 'Fast order-status answers using real Shopify data.',
+    mode: 'Customer support',
+  },
+  {
+    title: '4. Instagram and Facebook automation',
+    trigger: 'A comment, DM, product question, buying intent, or complaint appears.',
+    steps: ['Understand message', 'Fetch product context', 'Create response', 'Approve or reply'],
+    output: 'Social replies, product links, comment responses, and recommended products.',
+    mode: 'Social inbox',
+  },
+  {
+    title: '5. AI social media content',
+    trigger: 'A Shopify product, campaign, or content opportunity needs promotion.',
+    steps: ['Analyse product', 'Generate captions', 'Adapt per platform', 'Schedule best timing'],
+    output: 'Instagram and Facebook content with different captions, CTAs, hashtags, and timing logic.',
+    mode: 'Content engine',
+  },
+  {
+    title: '6. Full business automation',
+    trigger: 'The owner trusts the workflow and enables higher automation.',
+    steps: ['Monitor channels', 'Auto draft', 'Auto action where allowed', 'Supervisor review'],
+    output: 'Repetitive marketing and customer-service tasks run with the owner supervising.',
+    mode: 'Supervisor mode',
+  },
+  {
+    title: '7. Future TikTok automation',
+    trigger: 'A product can be promoted through short-form video.',
+    steps: ['Import product', 'Generate video idea', 'Create captions', 'Schedule TikTok post'],
+    output: 'Planned omnichannel short-form automation for product showcases and trends.',
+    mode: 'Future channel',
+  },
+]
+
+const capabilityRows = [
+  ['Website analysis', 'Business category, products, services, brand tone, content style', 'Workspace memory'],
+  ['Gmail', 'Customer inquiries, order emails, collaborations, business communications', 'Draft reply or auto-send'],
+  ['Shopify orders', 'Order number, customer details, delivery status, tracking data', 'Accurate support reply'],
+  ['Instagram + Facebook', 'DMs, comments, product questions, complaints, buying intent', 'Reply, product link, recommendation'],
+  ['Social content', 'Product data, audience logic, platform format, best posting time', 'Scheduled post draft or publish action'],
+  ['Automation mode', 'Confidence level and owner rules', 'AI employee with supervisor control'],
+]
+
 function App() {
   const route = getRoute()
 
@@ -120,6 +181,77 @@ function HomePage() {
                 <p>{text}</p>
               </div>
             </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section workflow-architecture" id="architecture">
+        <div className="section-heading">
+          <h2>Detailed workflow architecture</h2>
+          <p>
+            The PDF describes Taskiflo as a zero-setup AI employee. The website now shows that architecture as seven practical workflows, from onboarding to customer support and future omnichannel automation.
+          </p>
+        </div>
+        <div className="workflow-card-grid">
+          {workflowCards.map((workflow) => (
+            <article className="workflow-detail-card" key={workflow.title}>
+              <div className="workflow-detail-head">
+                <h3>{workflow.title}</h3>
+                <span>{workflow.mode}</span>
+              </div>
+              <p className="trigger-copy">{workflow.trigger}</p>
+              <div className="mini-flow" aria-label={`${workflow.title} steps`}>
+                {workflow.steps.map((step) => (
+                  <span key={step}>{step}</span>
+                ))}
+              </div>
+              <p className="output-copy">{workflow.output}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section split automation-map">
+        <div>
+          <h2>How Taskiflo actually works behind the scenes</h2>
+          <p>
+            Taskiflo uses the same operating loop across every channel: observe the signal, understand the business context, generate the safest next action, ask for approval when required, and keep a history of what happened.
+          </p>
+        </div>
+        <div className="loop-diagram" aria-label="Taskiflo operating loop">
+          {[
+            ['01', 'Observe', 'Email, order, DM, comment, product, or website signal'],
+            ['02', 'Understand', 'AI reads business memory, product data, and conversation context'],
+            ['03', 'Create', 'Draft reply, post, caption, product link, or campaign plan'],
+            ['04', 'Control', 'Owner approves manually or enables controlled automation'],
+            ['05', 'Learn', 'Taskiflo records history and improves future drafts'],
+          ].map(([number, label, text]) => (
+            <article key={label}>
+              <span>{number}</span>
+              <h3>{label}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section-heading">
+          <h2>What we provide by workflow</h2>
+          <p>This matrix makes the product promise concrete: each channel has a signal, an AI decision layer, and a practical output for the business owner.</p>
+        </div>
+        <div className="capability-table" role="table" aria-label="Taskiflo workflow capability matrix">
+          <div className="capability-row header" role="row">
+            <span role="columnheader">Workflow</span>
+            <span role="columnheader">Taskiflo analyses</span>
+            <span role="columnheader">Business output</span>
+          </div>
+          {capabilityRows.map(([workflow, analyses, output]) => (
+            <div className="capability-row" role="row" key={workflow}>
+              <strong role="cell">{workflow}</strong>
+              <span role="cell">{analyses}</span>
+              <span role="cell">{output}</span>
+            </div>
           ))}
         </div>
       </section>
@@ -232,6 +364,7 @@ function Header() {
       <nav aria-label="Main navigation">
         <a href="/#what-we-do">What we do</a>
         <a href="/#workflow">Workflow</a>
+        <a href="/#architecture">Architecture</a>
         <a href="/#integrations">Integrations</a>
         <a href="/app-store-assets">Submission</a>
         <a href="/support">Support</a>
