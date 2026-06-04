@@ -8,6 +8,8 @@ import {
   CalendarCheck,
   Check,
   CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
   FileText,
   Globe2,
   HelpCircle,
@@ -124,6 +126,11 @@ function App() {
 }
 
 function HomePage() {
+  const [activeWorkflowIndex, setActiveWorkflowIndex] = React.useState(0)
+  const activeWorkflow = workflowCards[activeWorkflowIndex]
+  const showPreviousWorkflow = () => setActiveWorkflowIndex((current) => (current === 0 ? workflowCards.length - 1 : current - 1))
+  const showNextWorkflow = () => setActiveWorkflowIndex((current) => (current === workflowCards.length - 1 ? 0 : current + 1))
+
   return (
     <main>
       <Header />
@@ -209,32 +216,65 @@ function HomePage() {
             </article>
           ))}
         </div>
-        <div className="workflow-card-grid">
-          {workflowCards.map((workflow) => (
-            <article className="workflow-detail-card" key={workflow.title}>
-              <div className="workflow-detail-head">
-                <h3>{workflow.title}</h3>
-                <span>{workflow.mode}</span>
-              </div>
-              <div className="workflow-trigger">
-                <strong>What starts it</strong>
-                <p className="trigger-copy">{workflow.trigger}</p>
-              </div>
-              <strong className="workflow-label">What Taskiflo does</strong>
-              <div className="mini-flow" aria-label={`${workflow.title} steps`}>
-                {workflow.steps.map((step, index) => (
-                  <span key={step}>
-                    <small>{index + 1}</small>
-                    {step}
-                  </span>
-                ))}
+        <div className="workflow-slider" aria-label="Detailed workflow slides">
+          <div className="workflow-slide-tabs" role="tablist" aria-label="Choose a Taskiflo workflow">
+            {workflowCards.map((workflow, index) => (
+              <button
+                aria-controls="workflow-slide-panel"
+                aria-selected={activeWorkflowIndex === index}
+                className={activeWorkflowIndex === index ? 'active' : ''}
+                key={workflow.title}
+                onClick={() => setActiveWorkflowIndex(index)}
+                role="tab"
+                type="button"
+              >
+                <span>{index + 1}</span>
+                {workflow.mode}
+              </button>
+            ))}
+          </div>
+
+          <article className="workflow-detail-card workflow-slide-card" id="workflow-slide-panel" role="tabpanel">
+            <div className="workflow-slide-meta">
+              <span>{activeWorkflowIndex + 1} of {workflowCards.length}</span>
+              <strong>{activeWorkflow.mode}</strong>
+            </div>
+            <div className="workflow-slide-actions">
+              <button type="button" onClick={showPreviousWorkflow}>
+                <ChevronLeft size={18} />
+                Previous
+              </button>
+              <button type="button" onClick={showNextWorkflow}>
+                Next workflow
+                <ChevronRight size={18} />
+              </button>
+            </div>
+            <div className="workflow-slide-layout">
+              <div className="workflow-slide-copy">
+                <div className="workflow-detail-head">
+                  <h3>{activeWorkflow.title}</h3>
+                  <span>{activeWorkflow.mode}</span>
+                </div>
+                <div className="workflow-trigger">
+                  <strong>What starts it</strong>
+                  <p className="trigger-copy">{activeWorkflow.trigger}</p>
+                </div>
+                <strong className="workflow-label">What Taskiflo does</strong>
+                <div className="mini-flow" aria-label={`${activeWorkflow.title} steps`}>
+                  {activeWorkflow.steps.map((step, index) => (
+                    <span key={step}>
+                      <small>{index + 1}</small>
+                      {step}
+                    </span>
+                  ))}
+                </div>
               </div>
               <div className="workflow-output">
                 <strong>Business result</strong>
-                <p className="output-copy">{workflow.output}</p>
+                <p className="output-copy">{activeWorkflow.output}</p>
               </div>
-            </article>
-          ))}
+            </div>
+          </article>
         </div>
       </section>
 

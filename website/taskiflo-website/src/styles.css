@@ -563,10 +563,107 @@ h2 {
   line-height: 1.48;
 }
 
-.workflow-card-grid {
+.workflow-slider {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.workflow-slide-tabs {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.workflow-slide-tabs button,
+.workflow-slide-actions button {
+  border: 1px solid rgba(94, 231, 255, 0.28);
+  border-radius: 8px;
+  color: #cfefff;
+  background: rgba(8, 20, 36, 0.78);
+  font-weight: 900;
+}
+
+.workflow-slide-tabs button {
+  display: grid;
+  gap: 7px;
+  align-content: start;
+  min-height: 76px;
+  padding: 11px;
+  text-align: left;
+}
+
+.workflow-slide-tabs button.active {
+  border-color: rgba(94, 231, 255, 0.72);
+  color: #ffffff;
+  background:
+    linear-gradient(135deg, rgba(94, 231, 255, 0.18), rgba(104, 166, 255, 0.08)),
+    rgba(10, 28, 48, 0.9);
+  box-shadow: inset 0 0 28px rgba(94, 231, 255, 0.09), 0 0 28px rgba(94, 231, 255, 0.09);
+}
+
+.workflow-slide-tabs button span {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  color: #03111b;
+  background: var(--cyan);
+  font-size: 12px;
+}
+
+.workflow-slide-card {
+  min-height: 0;
+  padding: 24px;
+  background:
+    linear-gradient(135deg, rgba(94, 231, 255, 0.08), transparent 44%),
+    var(--panel);
+}
+
+.workflow-slide-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 14px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.workflow-slide-meta strong {
+  color: var(--cyan);
+}
+
+.workflow-slide-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(280px, 0.72fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.workflow-slide-copy {
+  display: grid;
+  gap: 14px;
+}
+
+.workflow-slide-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.workflow-slide-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 14px;
+}
+
+.workflow-slide-actions button:last-child {
+  color: #03111b;
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
 }
 
 .workflow-detail-card {
@@ -948,8 +1045,19 @@ h2 {
   .explain-grid,
   .integration-grid,
   .asset-checklist,
-  .workflow-card-grid,
   .workflow-overview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .workflow-slide-tabs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .workflow-slide-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-slide-card .mini-flow {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1172,7 +1280,6 @@ h2 {
   .explain-grid,
   .integration-grid,
   .workflow-overview,
-  .workflow-card-grid,
   .mini-flow,
   .loop-diagram,
   .asset-checklist,
@@ -1203,6 +1310,57 @@ h2 {
 
   .workflow-overview p {
     font-size: 14px;
+  }
+
+  .workflow-slider {
+    gap: 12px;
+  }
+
+  .workflow-slide-tabs {
+    display: flex;
+    gap: 8px;
+    margin: 0 -16px;
+    overflow-x: auto;
+    padding: 0 16px 4px;
+    scroll-snap-type: x proximity;
+  }
+
+  .workflow-slide-tabs button {
+    flex: 0 0 152px;
+    min-height: 68px;
+    padding: 10px;
+    font-size: 12px;
+    scroll-snap-align: start;
+  }
+
+  .workflow-slide-tabs button span {
+    width: 24px;
+    height: 24px;
+  }
+
+  .workflow-slide-card {
+    padding: 16px;
+  }
+
+  .workflow-slide-meta {
+    display: grid;
+    gap: 5px;
+    font-size: 12px;
+  }
+
+  .workflow-slide-layout,
+  .workflow-slide-card .mini-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-slide-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-slide-actions button {
+    width: 100%;
+    min-height: 44px;
   }
 
   .feature-card,
