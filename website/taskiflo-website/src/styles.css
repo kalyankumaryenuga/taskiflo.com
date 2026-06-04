@@ -503,6 +503,66 @@ h2 {
   background-size: 42px 42px;
 }
 
+.workflow-overview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.workflow-overview article {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  border: 1px solid rgba(94, 231, 255, 0.34);
+  border-radius: 8px;
+  padding: 18px;
+  background:
+    linear-gradient(135deg, rgba(94, 231, 255, 0.12), rgba(104, 166, 255, 0.06)),
+    rgba(8, 20, 36, 0.86);
+  box-shadow: inset 0 0 34px rgba(94, 231, 255, 0.055);
+}
+
+.workflow-overview article:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 34px;
+  right: -14px;
+  z-index: 2;
+  width: 14px;
+  height: 1px;
+  background: var(--cyan);
+}
+
+.workflow-overview span,
+.mini-flow small {
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #03111b;
+  background: var(--cyan);
+  font-weight: 950;
+}
+
+.workflow-overview span {
+  width: 34px;
+  height: 34px;
+}
+
+.workflow-overview h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.workflow-overview p {
+  margin: 7px 0 0;
+  color: #bfd7e9;
+  line-height: 1.48;
+}
+
 .workflow-card-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -511,8 +571,8 @@ h2 {
 
 .workflow-detail-card {
   display: grid;
-  gap: 16px;
-  min-height: 312px;
+  gap: 14px;
+  min-height: 352px;
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 20px;
@@ -545,6 +605,28 @@ h2 {
   font-weight: 900;
 }
 
+.workflow-trigger,
+.workflow-output {
+  border: 1px solid rgba(94, 231, 255, 0.16);
+  border-radius: 8px;
+  padding: 13px 14px;
+  background: rgba(5, 14, 26, 0.5);
+}
+
+.workflow-trigger strong,
+.workflow-output strong,
+.workflow-label {
+  display: block;
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.workflow-label {
+  margin-bottom: -6px;
+}
+
 .trigger-copy,
 .output-copy {
   margin: 0;
@@ -552,9 +634,12 @@ h2 {
   line-height: 1.55;
 }
 
+.workflow-trigger p,
+.workflow-output p {
+  margin-top: 6px;
+}
+
 .output-copy {
-  border-top: 1px solid rgba(94, 231, 255, 0.18);
-  padding-top: 14px;
   color: #d7efff;
 }
 
@@ -566,6 +651,9 @@ h2 {
 
 .mini-flow span {
   position: relative;
+  display: grid;
+  gap: 8px;
+  align-content: start;
   min-height: 62px;
   border: 1px solid rgba(94, 231, 255, 0.28);
   border-radius: 8px;
@@ -575,6 +663,12 @@ h2 {
   font-size: 12px;
   font-weight: 850;
   line-height: 1.35;
+}
+
+.mini-flow small {
+  width: 22px;
+  height: 22px;
+  font-size: 11px;
 }
 
 .mini-flow span:not(:last-child)::after {
@@ -854,12 +948,21 @@ h2 {
   .explain-grid,
   .integration-grid,
   .asset-checklist,
-  .workflow-card-grid {
+  .workflow-card-grid,
+  .workflow-overview {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .workflow-overview article:last-child {
+    grid-column: 1 / -1;
   }
 
   .loop-diagram {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .workflow-overview article:not(:last-child)::after {
+    display: none;
   }
 
   .loop-diagram article:not(:last-child)::after {
@@ -1068,12 +1171,38 @@ h2 {
 
   .explain-grid,
   .integration-grid,
+  .workflow-overview,
   .workflow-card-grid,
   .mini-flow,
   .loop-diagram,
   .asset-checklist,
   .asset-grid {
     grid-template-columns: 1fr;
+  }
+
+  .workflow-overview {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .workflow-overview article,
+  .workflow-overview article:last-child {
+    grid-column: auto;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .workflow-overview span {
+    width: 30px;
+    height: 30px;
+  }
+
+  .workflow-overview h3 {
+    font-size: 18px;
+  }
+
+  .workflow-overview p {
+    font-size: 14px;
   }
 
   .feature-card,
@@ -1115,14 +1244,32 @@ h2 {
     font-size: 11px;
   }
 
+  .workflow-trigger,
+  .workflow-output {
+    padding: 12px;
+  }
+
+  .workflow-trigger strong,
+  .workflow-output strong,
+  .workflow-label {
+    font-size: 11px;
+  }
+
   .mini-flow {
     gap: 8px;
   }
 
   .mini-flow span {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
     min-height: 0;
-    padding: 11px 12px 11px 16px;
+    padding: 11px 12px;
     font-size: 12px;
+  }
+
+  .mini-flow small {
+    width: 21px;
+    height: 21px;
   }
 
   .mini-flow span:not(:last-child)::after {

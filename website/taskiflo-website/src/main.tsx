@@ -105,6 +105,12 @@ const capabilityRows = [
   ['Automation mode', 'Confidence level and owner rules', 'AI employee with supervisor control'],
 ]
 
+const workflowOverview = [
+  ['Connect', 'The owner connects the store, website, inbox, and social channels.'],
+  ['Understand', 'Taskiflo learns products, brand tone, customer context, and business rules.'],
+  ['Control', 'AI prepares the work, safety checks it, and waits for approval before anything goes out.'],
+]
+
 function App() {
   const route = getRoute()
 
@@ -189,8 +195,19 @@ function HomePage() {
         <div className="section-heading">
           <h2>Detailed workflow architecture</h2>
           <p>
-            The PDF describes Taskiflo as a zero-setup AI employee. The website now shows that architecture as seven practical workflows, from onboarding to customer support and future omnichannel automation.
+            Taskiflo works like an AI operations assistant for a Shopify business. Each workflow starts from a real store signal, turns it into a safe draft or action, and keeps the owner in control.
           </p>
+        </div>
+        <div className="workflow-overview" aria-label="Taskiflo workflow overview">
+          {workflowOverview.map(([label, text], index) => (
+            <article key={label}>
+              <span>{index + 1}</span>
+              <div>
+                <h3>{label}</h3>
+                <p>{text}</p>
+              </div>
+            </article>
+          ))}
         </div>
         <div className="workflow-card-grid">
           {workflowCards.map((workflow) => (
@@ -199,13 +216,23 @@ function HomePage() {
                 <h3>{workflow.title}</h3>
                 <span>{workflow.mode}</span>
               </div>
-              <p className="trigger-copy">{workflow.trigger}</p>
+              <div className="workflow-trigger">
+                <strong>What starts it</strong>
+                <p className="trigger-copy">{workflow.trigger}</p>
+              </div>
+              <strong className="workflow-label">What Taskiflo does</strong>
               <div className="mini-flow" aria-label={`${workflow.title} steps`}>
-                {workflow.steps.map((step) => (
-                  <span key={step}>{step}</span>
+                {workflow.steps.map((step, index) => (
+                  <span key={step}>
+                    <small>{index + 1}</small>
+                    {step}
+                  </span>
                 ))}
               </div>
-              <p className="output-copy">{workflow.output}</p>
+              <div className="workflow-output">
+                <strong>Business result</strong>
+                <p className="output-copy">{workflow.output}</p>
+              </div>
             </article>
           ))}
         </div>
