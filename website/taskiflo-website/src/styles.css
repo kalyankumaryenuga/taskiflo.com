@@ -934,6 +934,180 @@ h2 {
   width: 100%;
 }
 
+.pricing-page {
+  min-height: 70vh;
+  padding: clamp(52px, 7vw, 96px) clamp(20px, 5vw, 72px);
+  background:
+    linear-gradient(rgba(94, 231, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 231, 255, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 78% 8%, rgba(94, 231, 255, 0.16), transparent 30%),
+    linear-gradient(180deg, #07111f, #050b16);
+  background-size: 42px 42px, 42px 42px, auto, auto;
+}
+
+.pricing-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.66fr);
+  gap: clamp(24px, 5vw, 72px);
+  align-items: center;
+}
+
+.pricing-kicker {
+  display: inline-flex;
+  border: 1px solid rgba(94, 231, 255, 0.3);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: var(--cyan);
+  background: rgba(9, 26, 43, 0.72);
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.pricing-hero h1 {
+  max-width: 900px;
+  margin: 18px 0 0;
+  color: #ffffff;
+  font-size: clamp(42px, 6vw, 86px);
+  line-height: 0.95;
+}
+
+.pricing-hero p,
+.pricing-note-panel p {
+  color: var(--muted);
+  line-height: 1.58;
+}
+
+.pricing-hero > div > p {
+  max-width: 760px;
+  margin: 24px 0 0;
+  font-size: 20px;
+}
+
+.pricing-plan-card,
+.pricing-feature-panel,
+.pricing-workflow-grid article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: inset 0 0 28px rgba(94, 231, 255, 0.045);
+}
+
+.pricing-plan-card {
+  padding: 24px;
+  background:
+    linear-gradient(135deg, rgba(94, 231, 255, 0.12), rgba(104, 166, 255, 0.06)),
+    var(--panel);
+}
+
+.pricing-plan-card span {
+  color: var(--cyan);
+  font-size: 13px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.pricing-plan-card strong {
+  display: block;
+  margin-top: 14px;
+  color: #ffffff;
+  font-size: clamp(48px, 6vw, 74px);
+  line-height: 0.95;
+}
+
+.pricing-plan-card p {
+  margin: 18px 0 0;
+}
+
+.pricing-plan-card .primary-button {
+  margin-top: 24px;
+  width: 100%;
+}
+
+.pricing-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.pricing-feature-panel {
+  padding: 24px;
+}
+
+.pricing-feature-panel h2,
+.pricing-workflow-section h2,
+.pricing-faq-grid h2 {
+  font-size: 28px;
+}
+
+.pricing-feature-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.pricing-feature-list span {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 46px;
+  border: 1px solid rgba(94, 231, 255, 0.22);
+  border-radius: 8px;
+  padding: 11px 12px;
+  color: #e7f8ff;
+  background: rgba(10, 28, 48, 0.64);
+  font-weight: 850;
+}
+
+.pricing-feature-list svg {
+  flex: 0 0 auto;
+  color: var(--cyan);
+}
+
+.pricing-workflow-section {
+  margin-top: clamp(48px, 6vw, 76px);
+}
+
+.pricing-workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.pricing-workflow-grid article {
+  padding: 18px;
+}
+
+.pricing-workflow-grid span {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  color: #03111b;
+  background: var(--cyan);
+  font-weight: 950;
+}
+
+.pricing-workflow-grid h3 {
+  margin: 18px 0 0;
+  color: #ffffff;
+}
+
+.pricing-workflow-grid p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.pricing-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+
 .legal-page {
   min-height: 66vh;
   background:
@@ -1037,6 +1211,8 @@ h2 {
   .hero,
   .split,
   .assets-band,
+  .pricing-hero,
+  .pricing-detail-grid,
   .pricing,
   .do-dont-grid {
     grid-template-columns: 1fr;
@@ -1066,6 +1242,11 @@ h2 {
   }
 
   .loop-diagram {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pricing-workflow-grid,
+  .pricing-feature-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1132,6 +1313,7 @@ h2 {
 
   .hero,
   .section,
+  .pricing-page,
   .legal-page {
     padding: 34px 16px;
   }
@@ -1272,6 +1454,7 @@ h2 {
   .split > div > p,
   .assets-band > div > p,
   .pricing > div > p,
+  .pricing-hero > div > p,
   .legal-content > p {
     font-size: 16px;
     line-height: 1.52;
@@ -1283,8 +1466,39 @@ h2 {
   .mini-flow,
   .loop-diagram,
   .asset-checklist,
+  .pricing-feature-list,
+  .pricing-workflow-grid,
+  .pricing-faq-grid,
   .asset-grid {
     grid-template-columns: 1fr;
+  }
+
+  .pricing-hero {
+    gap: 20px;
+  }
+
+  .pricing-hero h1 {
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .pricing-plan-card,
+  .pricing-feature-panel,
+  .pricing-workflow-grid article {
+    padding: 16px;
+  }
+
+  .pricing-plan-card strong {
+    font-size: 44px;
+  }
+
+  .pricing-detail-grid,
+  .pricing-faq-grid {
+    margin-top: 16px;
+  }
+
+  .pricing-workflow-section {
+    margin-top: 38px;
   }
 
   .workflow-overview {

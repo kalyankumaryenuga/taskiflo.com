@@ -28,7 +28,7 @@ import {
 } from 'lucide-react'
 import './styles.css'
 
-type Route = 'home' | 'privacy' | 'terms' | 'data-deletion' | 'support' | 'faq' | 'app-store-assets'
+type Route = 'home' | 'privacy' | 'terms' | 'data-deletion' | 'support' | 'faq' | 'pricing' | 'app-store-assets'
 
 const siteUrl = 'https://taskiflo.com'
 const fallbackUrl = 'https://taskiflo.vercel.app'
@@ -41,7 +41,7 @@ const submissionValues = [
   ['Support email', supportEmail],
   ['Developer website', siteUrl],
   ['FAQ URL', `${siteUrl}/faq`],
-  ['Pricing URL', `${siteUrl}/#pricing`],
+  ['Pricing URL', `${siteUrl}/pricing`],
   ['App card subtitle', 'Approval-first AI marketing for Shopify stores'],
   ['Search terms', 'marketing automation, social media, approval workflow, content calendar, AI marketing'],
 ]
@@ -113,6 +113,22 @@ const workflowOverview = [
   ['Control', 'AI prepares the work, safety checks it, and waits for approval before anything goes out.'],
 ]
 
+const launchPlanFeatures = [
+  'Website and store signal analysis',
+  'Approval inbox for AI-generated drafts',
+  'Gmail, social, and Shopify campaign draft workflows',
+  'Content calendar and scheduling handoff',
+  'Safety checks for stock, delivery, price, offer, and policy claims',
+  'Activity history for approvals, edits, schedules, sends, and publishes',
+]
+
+const pricingWorkflowItems = [
+  ['Setup', 'Create a workspace, add business context, and connect approved channels.'],
+  ['Drafting', 'Taskiflo prepares replies, posts, product campaigns, and content calendar ideas.'],
+  ['Approval', 'The owner reviews each draft, confirms safety checks, and decides what moves forward.'],
+  ['Tracking', 'Calendar and activity history show what was approved, scheduled, sent, or blocked.'],
+]
+
 function App() {
   const route = getRoute()
 
@@ -121,6 +137,7 @@ function App() {
   if (route === 'data-deletion') return <DeletionPage />
   if (route === 'support') return <SupportPage />
   if (route === 'faq') return <FaqPage />
+  if (route === 'pricing') return <PricingPage />
   if (route === 'app-store-assets') return <AssetsPage />
   return <HomePage />
 }
@@ -400,7 +417,7 @@ function HomePage() {
       <section className="section pricing" id="pricing">
         <div>
           <h2>Simple launch pricing</h2>
-          <p>Use this as the public Shopify plan while the app is in review.</p>
+          <p>Use this as the public Shopify plan while the app is in review. Full plan details now live on a dedicated pricing page.</p>
         </div>
         <article className="price-card">
           <span>Launch plan</span>
@@ -412,7 +429,7 @@ function HomePage() {
             <li>Approval inbox and content calendar</li>
             <li>Safety checks for sensitive claims</li>
           </ul>
-          <a className="primary-button" href="/support">Contact support <ArrowRight size={18} /></a>
+          <a className="primary-button" href="/pricing">View pricing details <ArrowRight size={18} /></a>
         </article>
       </section>
 
@@ -433,6 +450,7 @@ function Header() {
         <a href="/#workflow">Workflow</a>
         <a href="/#architecture">Architecture</a>
         <a href="/#integrations">Integrations</a>
+        <a href="/pricing">Pricing</a>
         <a href="/app-store-assets">Submission</a>
         <a href="/support">Support</a>
       </nav>
@@ -591,6 +609,78 @@ function FaqPage() {
   )
 }
 
+function PricingPage() {
+  return (
+    <main>
+      <Header />
+      <section className="pricing-page">
+        <div className="pricing-hero">
+          <div>
+            <span className="pricing-kicker">Simple launch plan</span>
+            <h1>Pricing built for approval-first Shopify automation</h1>
+            <p>
+              Taskiflo starts with one clear monthly plan for small Shopify teams that want AI drafting, workflow control, and owner approval before anything reaches customers.
+            </p>
+          </div>
+          <article className="pricing-plan-card">
+            <span>Launch plan</span>
+            <strong>$29/month</strong>
+            <p>For one Shopify business workspace using approval-first AI drafts and calendar workflows.</p>
+            <a className="primary-button" href="/support">Contact support <ArrowRight size={18} /></a>
+          </article>
+        </div>
+
+        <section className="pricing-detail-grid" aria-label="Launch plan details">
+          <article className="pricing-feature-panel">
+            <h2>Included in the launch plan</h2>
+            <div className="pricing-feature-list">
+              {launchPlanFeatures.map((feature) => (
+                <span key={feature}><Check size={16} /> {feature}</span>
+              ))}
+            </div>
+          </article>
+          <article className="pricing-feature-panel pricing-note-panel">
+            <h2>How billing works</h2>
+            <p>The public launch plan is priced monthly. During review, this gives Shopify and Meta reviewers a clear paid plan to evaluate while Taskiflo remains simple for early merchants.</p>
+            <p>Final sends, posts, and customer-facing actions remain controlled by the merchant. Pricing does not change the approval-first safety model.</p>
+          </article>
+        </section>
+
+        <section className="pricing-workflow-section">
+          <div className="section-heading">
+            <h2>What the plan covers</h2>
+            <p>The launch plan covers the practical workflow a merchant needs from setup to approval tracking.</p>
+          </div>
+          <div className="pricing-workflow-grid">
+            {pricingWorkflowItems.map(([title, text], index) => (
+              <article key={title}>
+                <span>{index + 1}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="pricing-faq-grid" aria-label="Pricing questions">
+          {[
+            ['Is there a free plan?', 'Not for launch. The review-ready public plan is the $29/month Launch plan.'],
+            ['Can merchants cancel?', 'Yes. Merchants should contact support for account, billing, or removal requests while the app is in early launch.'],
+            ['Does the plan publish automatically?', 'No. Taskiflo is approval-first. The merchant reviews and approves drafts before external actions.'],
+            ['What if a business needs more volume?', 'Larger workflows can be handled through support while Taskiflo expands plan tiers.'],
+          ].map(([question, answer]) => (
+            <article className="faq-item" key={question}>
+              <h2>{question}</h2>
+              <p>{answer}</p>
+            </article>
+          ))}
+        </section>
+      </section>
+      <Footer />
+    </main>
+  )
+}
+
 function AssetsPage() {
   return (
     <LegalShell title="Submission Assets" icon={FileText}>
@@ -622,6 +712,7 @@ function Footer() {
         <a href="/privacy">Privacy</a>
         <a href="/terms">Terms</a>
         <a href="/data-deletion">Data deletion</a>
+        <a href="/pricing">Pricing</a>
         <a href="/faq">FAQ</a>
         <a href="/support">Support</a>
       </nav>
@@ -636,6 +727,7 @@ function getRoute(): Route {
   if (path === '/data-deletion') return 'data-deletion'
   if (path === '/support') return 'support'
   if (path === '/faq') return 'faq'
+  if (path === '/pricing') return 'pricing'
   if (path === '/app-store-assets') return 'app-store-assets'
   return 'home'
 }
